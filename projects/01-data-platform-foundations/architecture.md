@@ -29,3 +29,13 @@ Analytics Data Model
       │
       ▼
 Dashboard / BI Layer
+
+
+## Data Flow
+
+1. Retail transaction dataset is downloaded from the UCI repository.
+2. Raw data is ingested into the raw data layer.
+3. SQL transformations standardize and clean the data.
+4. Curated fact and dimension tables are generated.
+5. Data quality checks validate the transformed datasets.
+6. Analytics datasets are consumed by dashboard metrics.
