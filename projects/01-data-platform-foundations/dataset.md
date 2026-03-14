@@ -1,22 +1,32 @@
+# Dataset Documentation
 
----
+## Source
 
-## Why this README works
+UCI Machine Learning Repository  
+Online Retail Dataset
 
-It signals the exact things your target audience cares about:
-- architecture
-- layered design
-- data quality
-- reporting readiness
-- business outcomes
+## Description
 
-It also avoids the common junior-portfolio mistake of jumping straight into notebooks without showing system design.
+Transactional data for a UK-based online retailer between
+December 2010 and December 2011.
 
-A small improvement I’d recommend: add two more files right away under this project:
-- `dataset.md`
-- `architecture.md`
+## Schema
 
-That makes the project feel immediately more mature.
+InvoiceNo
+StockCode
+Description
+Quantity
+InvoiceDate
+UnitPrice
+CustomerID
+Country
 
-Next, I can generate `dataset.md` and `architecture.md` for this same project so your repo starts looking like a real engineering workspace.
-::contentReference[oaicite:1]{index=1}
+## Data Volume
+
+541,909 records
+
+## Known Data Issues
+
+- Missing CustomerID values
+- Negative quantities indicating product returns
+- Some duplicate invoices
