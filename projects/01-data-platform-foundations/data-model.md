@@ -175,6 +175,19 @@ fact_sales_transactions.customer_id → dim_customer.customer_id
 fact_sales_transactions.stock_code → dim_product.stock_code
 fact_sales_transactions.invoice_date → dim_date.date
 
+
+
+Fact Sales Transactions
+│
+▼
+Dim Customer
+│
+▼
+Dim Product
+│
+▼
+Dim Date
+
 ## Data Model Diagram
 
 ```mermaid
