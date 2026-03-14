@@ -171,20 +171,9 @@ Purpose:
 ---
 
 # Data Model Relationships
-dim_customer.customer_id
-│
-▼
-fact_sales_transactions.customer_id
-
-dim_product.stock_code
-│
-▼
-fact_sales_transactions.stock_code
-
-dim_date.date
-│
-▼
-fact_sales_transactions.invoice_date
+fact_sales_transactions.customer_id → dim_customer.customer_id
+fact_sales_transactions.stock_code → dim_product.stock_code
+fact_sales_transactions.invoice_date → dim_date.date
 
 ## Data Model Diagram
 
