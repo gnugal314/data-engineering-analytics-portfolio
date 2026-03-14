@@ -186,7 +186,41 @@ dim_date.date
 ▼
 fact_sales_transactions.invoice_date
 
+## Data Model Diagram
 
+```mermaid
+erDiagram
+
+    FACT_SALES_TRANSACTIONS {
+        string invoice_no
+        string stock_code
+        string customer_id
+        timestamp invoice_date
+        int quantity
+        float unit_price
+        float sales_amount
+    }
+
+    DIM_CUSTOMER {
+        string customer_id
+        string country
+    }
+
+    DIM_PRODUCT {
+        string stock_code
+        string description
+    }
+
+    DIM_DATE {
+        date date
+        int year
+        int month
+    }
+
+    FACT_SALES_TRANSACTIONS }o--|| DIM_CUSTOMER : customer_id
+    FACT_SALES_TRANSACTIONS }o--|| DIM_PRODUCT : stock_code
+    FACT_SALES_TRANSACTIONS }o--|| DIM_DATE : invoice_date
+```
 
 ---
 
