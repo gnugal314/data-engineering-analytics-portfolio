@@ -1,0 +1,11 @@
+{
+  "source_file": "data/raw/online_retail.csv",
+  "processed_file": "data/processed/online_retail_raw_loaded.csv",
+  "load_timestamp_utc": "2026-03-16T05:30:32.196732+00:00",
+  "row_count_source": 541909,
+  "row_count_output": 541909,
+  "required_columns_present": true,
+  "invoice_date_parse_success": true,
+  "status": "SUCCESS",
+  "notes": []
+}
