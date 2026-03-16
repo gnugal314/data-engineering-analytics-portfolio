@@ -259,8 +259,13 @@ Recommended charts:
 
 ## Example SQL Snippets
 
+
+### Monthly Revenue Trend
+
+Monthly trend used for executive revenue reporting and time-series analysis.
+
 <details>
-<summary>### Monthly Revenue Trend
+<summary>View SQL Query</summary>
 
 ```sql
 SELECT
@@ -269,11 +274,17 @@ SELECT
 FROM analytics.monthly_sales_summary
 ORDER BY month_start_date;
 ```
+
 </details>
 
 ---
+
+### Top Products by Revenue
+
+Identifies the highest-performing products by total net revenue.
+
 <details>
-<siummary>### Top Products by Revenue
+<summary>View SQL Query</summary>
 
 ```sql
 SELECT
@@ -289,8 +300,12 @@ LIMIT 10;
 
 ---
 
+### Customer Segmentation Distribution
+
+Shows how customers are distributed across value-based segments.
+
 <details>
-<summary>### Customer Segmentation Distribution 
+<summary>View SQL Query</summary>
 
 ```sql
 SELECT
@@ -300,13 +315,17 @@ FROM analytics.dim_customer
 GROUP BY customer_segment
 ORDER BY customer_count DESC;
 ```
-</details>
 
+</details>
 
 ---
 
+### Sales by Country
+
+Displays geographic revenue distribution across customer locations.
+
 <details>
-<summary>### Sales by Country
+<summary>View SQL Query</summary>
 
 ```sql
 SELECT
