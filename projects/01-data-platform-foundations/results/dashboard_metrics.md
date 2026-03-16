@@ -267,9 +267,11 @@ SELECT
     net_revenue
 FROM analytics.monthly_sales_summary
 ORDER BY month_start_date;
+```
 
---### Top Products by Revenue
+### Top Products by Revenue
 
+```sql
 SELECT
     stock_code,
     product_description,
@@ -277,24 +279,28 @@ SELECT
 FROM analytics.dim_product
 ORDER BY net_revenue DESC
 LIMIT 10;
+```
 
---### Customer Segmentation Distribution 
+### Customer Segmentation Distribution 
 
+```sql
 SELECT
     customer_segment,
     COUNT(*) AS customer_count
 FROM analytics.dim_customer
 GROUP BY customer_segment
 ORDER BY customer_count DESC;
+```
 
----### Sales by Country
+### Sales by Country
+```sql
 SELECT
     country,
     SUM(net_sales_amount) AS total_revenue
 FROM analytics.fact_sales_transactions
 GROUP BY country
 ORDER BY total_revenue DESC;
-
+```
 
 
 
