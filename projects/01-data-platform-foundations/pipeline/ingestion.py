@@ -110,7 +110,7 @@ def standardize_column_names(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     df.columns = [col.strip() for col in df.columns]
     return df
-    
+
 
 def parse_invoice_date(df: pd.DataFrame) -> tuple[pd.DataFrame, bool]:
     """
@@ -220,17 +220,17 @@ def run_ingestion_pipeline() -> None:
         write_processed_output(df, PROCESSED_FILE_PATH)
 
         metadata = IngestionMetadata(
-            source_file=str(RAW_FILE_PATH),
-            processed_file=str(PROCESSED_FILE_PATH),
-            load_timestamp_utc=datetime.now(timezone.utc).isoformat(),
-            row_count_source=int(source_row_count),
-            row_count_output=int(output_row_count),
-            required_columns_present=bool(required_columns_present),
-            invoice_date_parse_success=bool(invoice_date_parse_success),
-            status="SUCCESS",
-            notes=[str(note) for note in notes],
+        source_file=str(RAW_FILE_PATH),
+        processed_file=str(PROCESSED_FILE_PATH),
+        load_timestamp_utc=datetime.now(timezone.utc).isoformat(),
+        row_count_source=int(source_row_count),
+        row_count_output=int(output_row_count),
+        required_columns_present=bool(required_columns_present),
+        invoice_date_parse_success=bool(invoice_date_parse_success),
+        status="SUCCESS",
+        notes=[str(note) for note in notes],
 )
-)
+        
         write_metadata(metadata, METADATA_FILE_PATH)
 
         logger.info("Ingestion pipeline completed successfully.")
@@ -239,17 +239,16 @@ def run_ingestion_pipeline() -> None:
         logger.exception("Ingestion pipeline failed: %s", exc)
 
         failed_metadata = IngestionMetadata(
-            source_file=str(RAW_FILE_PATH),
-            processed_file=str(PROCESSED_FILE_PATH),
-            load_timestamp_utc=datetime.now(timezone.utc).isoformat(),
-            row_count_source=0,
-            row_count_output=0,
-            required_columns_present=False,
-            invoice_date_parse_success=False,
-            status="FAILED",
-            notes=[str(exc)],
+    source_file=str(RAW_FILE_PATH),
+    processed_file=str(PROCESSED_FILE_PATH),
+    load_timestamp_utc=datetime.now(timezone.utc).isoformat(),
+    row_count_source=0,
+    row_count_output=0,
+    required_columns_present=False,
+    invoice_date_parse_success=False,
+    status="FAILED",
+    notes=[str(exc)],
 )
-        )
 
         ensure_output_directory(PROCESSED_DIR)
         write_metadata(failed_metadata, METADATA_FILE_PATH)
