@@ -259,7 +259,8 @@ Recommended charts:
 
 ## Example SQL Snippets
 
-### Monthly Revenue Trend
+<details>
+<summary>### Monthly Revenue Trend
 
 ```sql
 SELECT
@@ -268,8 +269,11 @@ SELECT
 FROM analytics.monthly_sales_summary
 ORDER BY month_start_date;
 ```
+</details>
 
-### Top Products by Revenue
+---
+<details>
+<siummary>### Top Products by Revenue
 
 ```sql
 SELECT
@@ -281,7 +285,12 @@ ORDER BY net_revenue DESC
 LIMIT 10;
 ```
 
-### Customer Segmentation Distribution 
+</details>
+
+---
+
+<details>
+<summary>### Customer Segmentation Distribution 
 
 ```sql
 SELECT
@@ -291,8 +300,14 @@ FROM analytics.dim_customer
 GROUP BY customer_segment
 ORDER BY customer_count DESC;
 ```
+</details>
 
-### Sales by Country
+
+---
+
+<details>
+<summary>### Sales by Country
+
 ```sql
 SELECT
     country,
@@ -301,6 +316,8 @@ FROM analytics.fact_sales_transactions
 GROUP BY country
 ORDER BY total_revenue DESC;
 ```
+
+</details>
 
 
 
