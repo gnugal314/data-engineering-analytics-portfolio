@@ -1,0 +1,83 @@
+-- ============================================================================
+-- File: create_monthly_sales_summary.sql
+-- Purpose: Build analytics.monthly_sales_summary for dashboard reporting
+-- Project: 01-data-platform-foundations
+-- ============================================================================
+
+CREATE SCHEMA IF NOT EXISTS analytics;
+
+DROP TABLE IF EXISTS analytics.monthly_sales_summary;
+
+CREATE TABLE analytics.monthly_sales_summary AS
+
+WITH monthly_base AS (
+    SELECT
+        d.calendar_year,
+        d.calendar_month,
+        d.month_name,
+        d.month_start_date,
+        COUNT(DISTINCT f.invoice_no) AS total_orders,
+        COUNT(DISTINCT f.customer_id) AS active_customers,
+        SUM(CASE WHEN f.is_return = 0 THEN f.quantity ELSE 0 END) AS total_units_sold,
+        SUM(CASE WHEN f.is_return = 1 THEN ABS(f.quantity) ELSE 0 END) AS total_units_returned,
+        SUM(f.gross_sales_amount) AS gross_revenue,
+        SUM(f.net_sales_amount) AS net_revenue,
+        SUM(CASE WHEN f.is_return = 1 THEN 1 ELSE 0 END) AS return_transaction_count
+    FROM analytics.fact_sales_transactions f
+    JOIN analytics.dim_date d
+        ON f.invoice_date = d.date_day
+    GROUP BY
+        d.calendar_year,
+        d.calendar_month,
+        d.month_name,
+        d.month_start_date
+),
+
+monthly_enriched AS (
+    SELECT
+        calendar_year,
+        calendar_month,
+        month_name,
+        month_start_date,
+        total_orders,
+        active_customers,
+        total_units_sold,
+        total_units_returned,
+        gross_revenue,
+        net_revenue,
+        return_transaction_count,
+
+        CASE
+            WHEN total_orders > 0 THEN net_revenue / total_orders
+            ELSE 0
+        END AS average_order_value,
+
+        CASE
+            WHEN total_units_sold > 0 THEN net_revenue / total_units_sold
+            ELSE 0
+        END AS revenue_per_unit,
+
+        CASE
+            WHEN total_orders > 0 THEN return_transaction_count * 1.0 / total_orders
+            ELSE 0
+        END AS return_rate
+    FROM monthly_base
+)
+
+SELECT
+    calendar_year,
+    calendar_month,
+    month_name,
+    month_start_date,
+    total_orders,
+    active_customers,
+    total_units_sold,
+    total_units_returned,
+    gross_revenue,
+    net_revenue,
+    return_transaction_count,
+    average_order_value,
+    revenue_per_unit,
+    return_rate
+FROM monthly_enriched
+ORDER BY month_start_date;
